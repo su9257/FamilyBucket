@@ -36,7 +36,6 @@ public class Big_O : MonoBehaviour
         Debug.Log($"时间复杂的为:线性阶O(n)");
     }
 
-
     /// <summary>
     /// 对数阶
     /// </summary>
@@ -66,6 +65,5 @@ public class Big_O : MonoBehaviour
         }
         Debug.Log($"时间复杂的为:平方阶O(n^2)");
     }
-
 
 }
