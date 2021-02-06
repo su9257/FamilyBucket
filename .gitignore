@@ -4,8 +4,10 @@ AlgorithmFamilyBucket/Library/
 AlgorithmFamilyBucket/Temp/
 AlgorithmFamilyBucket/AlgorithmFamilyBucket.sln
 AlgorithmFamilyBucket/Assembly-CSharp.csproj
+AlgorithmFamilyBucket/obj/
+AlgorithmFamilyBucket/.vs/
 DesignPatternFamilyBucket/Library/
-DesignPatternFamilyBucket/Logs/
 DesignPatternFamilyBucket/Temp/
 DesignPatternFamilyBucket/Assembly-CSharp.csproj
 DesignPatternFamilyBucket/DesignPatternFamilyBucket.sln
+DesignPatternFamilyBucket/Logs/Packages-Update.log
