@@ -11,3 +11,7 @@ DesignPatternFamilyBucket/Temp/
 DesignPatternFamilyBucket/Assembly-CSharp.csproj
 DesignPatternFamilyBucket/DesignPatternFamilyBucket.sln
 DesignPatternFamilyBucket/Logs/Packages-Update.log
+PureMVC_Standard/Library/PackageCache/
+PureMVC_Standard/Logs/
+PureMVC_Standard/Library/
+PureMVC_Standard/Temp/
