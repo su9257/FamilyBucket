@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using PureMVC.Interfaces;
+using PureMVC.Patterns.Mediator;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +20,19 @@ public class GameStart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
 
+        }
+    }
+
+    public IList<Func<IMediator>> mediatorFactory = new List<Func<IMediator>>();
+
+    private void InitializePanel()
+    {
+        mediatorFactory.Add(() => new Mediator(nameof(Mediator), this));
+
+        for (int i = 0; i < mediatorFactory.Count; i++)
+        {
+            var tempMediator = mediatorFactory[i]();
+            ApplicationFacade.Instance.RegisterMediator(tempMediator);
         }
     }
 }
