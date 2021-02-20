@@ -10,27 +10,8 @@ using PureMVC.Interfaces;
 namespace PureMVC.Patterns.Observer
 {
     /// <summary>
-    /// A Base <c>INotifier</c> implementation.
+    /// INotifier 实现类
     /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         <c>MacroCommand, Command, Mediator</c> and <c>Proxy</c> 
-    ///         all have a need to send <c>Notifications</c>.
-    ///     </para>
-    ///     <para>
-    ///         The <c>INotifier</c> interface provides a common method called
-    ///         <c>sendNotification</c> that relieves implementation code of 
-    ///         the necessity to actually construct <c>Notifications</c>.
-    ///     </para>
-    ///     <para>
-    ///         The <c>Notifier</c> class, which all of the above mentioned classes
-    ///         extend, provides an initialized reference to the <c>Facade</c>
-    ///         Singleton, which is required for the convenience method
-    ///         for sending <c>Notifications</c>, but also eases implementation as these
-    ///         classes have frequent <c>Facade</c> interactions and usually require
-    ///         access to the facade anyway.
-    ///     </para>
-    /// </remarks>
     /// <seealso cref="PureMVC.Patterns.Proxy.Proxy"/>
     /// <seealso cref="PureMVC.Patterns.Facade.Facade"/>
     /// <seealso cref="PureMVC.Patterns.Mediator.Mediator"/>
@@ -39,17 +20,11 @@ namespace PureMVC.Patterns.Observer
     public class Notifier : INotifier
     {
         /// <summary>
-        /// Create and send an <c>INotification</c>.
+        /// 发送消息
         /// </summary>
-        /// <remarks>
-        ///     <para>
-        ///         Keeps us from having to construct new INotification 
-        ///         instances in our implementation code.
-        ///     </para>
-        /// </remarks>
-        /// <param name="notificationName">the name of the notification to send</param>
-        /// <param name="body">the body of the notification (optional)</param>
-        /// <param name="type">the type of the notification (optional)</param>
+        /// <param name="notificationName"></param>
+        /// <param name="body"></param>
+        /// <param name="type"></param>
         public virtual void SendNotification(string notificationName, object body = null, string type = null)
         {
             Facade.SendNotification(notificationName, body, type);
