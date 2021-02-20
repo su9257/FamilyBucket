@@ -20,8 +20,8 @@ namespace PureMVC.Patterns.Observer
         /// <summary>
         /// Observer 构造函数
         /// </summary>
-        /// <param name="notifyMethod">对应Mediator中执行的函数</param>
-        /// <param name="notifyContext">对应的Mediator</param>
+        /// <param name="notifyMethod">通知 Observer 时需要执行的函数</param>
+        /// <param name="notifyContext">执行 notifyMethod 函数的实例</param>
         public Observer(Action<INotification> notifyMethod, object notifyContext)
         {
             NotifyMethod = notifyMethod;
@@ -31,26 +31,26 @@ namespace PureMVC.Patterns.Observer
         /// <summary>
         /// 执行此Observer持有的回调
         /// </summary>
-        /// <param name="notification">the <c>INotification</c> to pass to the interested object's notification method.</param>
+        /// <param name="notification">INotification 实例</param>
         public virtual void NotifyObserver(INotification notification)
         {
             NotifyMethod(notification);
         }
 
         /// <summary>
-        /// 比较持有的Mediator是否相同
+        /// 需要比较函数是否出自同一实例
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">需要比较的实例</param>
         /// <returns></returns>
         public virtual bool CompareNotifyContext(object obj)
         {
             return NotifyContext.Equals(obj);
         }
 
-        /// <summary>此观察者对应的回调函数</summary>
+        /// <summary>通知 Observer 时需要执行的函数</summary>
         public Action<INotification> NotifyMethod { get; set; }
 
-        /// <summary>Context object</summary>
+        /// <summary>执行 notifyMethod 函数的实例</summary>
         public object NotifyContext { get; set; }
     }
 }
