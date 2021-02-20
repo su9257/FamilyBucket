@@ -15,3 +15,7 @@ PureMVC_Standard/Library/PackageCache/
 PureMVC_Standard/Logs/
 PureMVC_Standard/Library/
 PureMVC_Standard/Temp/
+PureMVC_Standard/Assembly-CSharp.csproj
+PureMVC_Standard/PureMVC.csproj
+PureMVC_Standard/PureMVC_Standard.sln
+PureMVC_Standard/obj/
