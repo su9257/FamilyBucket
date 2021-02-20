@@ -8,37 +8,25 @@
 namespace PureMVC.Interfaces
 {
     /// <summary>
-    /// The interface definition for a PureMVC View.
+    /// PureMVC View 核心类接口
     /// </summary>
-    /// <remarks>
-    ///     <para>In PureMVC, the <c>View</c> class assumes these responsibilities:</para>
-    ///     <list type="bullet">
-    ///         <item>Maintain a cache of <c>IMediator</c> instances</item>
-    ///         <item>Provide methods for registering, retrieving, and removing <c>IMediators</c></item>
-    ///         <item>Managing the observer lists for each <c>INotification</c> in the application</item>
-    ///         <item>Providing a method for attaching <c>IObservers</c> to an <c>INotification</c>'s observer list</item>
-    ///         <item>Providing a method for broadcasting an <c>INotification</c></item>
-    ///         <item>Notifying the <c>IObservers</c> of a given <c>INotification</c> when it broadcast</item>
-    ///     </list>
-    /// </remarks>
     /// <seealso cref="IMediator"/>
     /// <seealso cref="IObserver"/>
     /// <seealso cref="INotification"/>
     public interface IView
     {
         /// <summary>
-        /// Register an <c>IObserver</c> to be notified
-        /// of <c>INotifications</c> with a given name.
+        /// 注册对应的 Observer 类型通知类
         /// </summary>
-        /// <param name="notificationName">the name of the <c>INotifications</c> to notify this <c>IObserver</c> of</param>
-        /// <param name="observer">the <c>IObserver</c> to register</param>
+        /// <param name="notificationName">对应通知消息名称</param>
+        /// <param name="observer">Observer 实例</param>
         void RegisterObserver(string notificationName, IObserver observer);
 
         /// <summary>
-        /// Remove a group of observers from the observer list for a given Notification name.
+        /// 注销对应的 Observer 通知
         /// </summary>
-        /// <param name="notificationName">which observer list to remove from </param>
-        /// <param name="notifyContext">removed the observers with this object as their notifyContext</param>
+        /// <param name="notificationName">消息名称</param>
+        /// <param name="notifyContext">对应 Observer 实例</param>
         void RemoveObserver(string notificationName, object notifyContext);
 
         /// <summary>
