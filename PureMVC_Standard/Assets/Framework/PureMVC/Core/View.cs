@@ -22,17 +22,9 @@ namespace PureMVC.Core
     public class View : IView
     {
         /// <summary>
-        /// Constructs and initializes a new view
+        /// 构造并初始化View核心类
         /// </summary>
-        /// <remarks>
-        ///     <para>
-        ///         This <c>IView</c> implementation is a Singleton, 
-        ///         so you should not call the constructor 
-        ///         directly, but instead call the static Singleton 
-        ///         Factory method <c>View.getInstance(() => new View())</c>
-        ///     </para>
-        /// </remarks>
-        /// <exception cref="System.Exception">Thrown if Singleton instance has already been constructed</exception>
+        /// <exception cref="System.Exception">重复构造将会抛出异常</exception>
         public View()
         {
             if (instance != null) throw new Exception(SingletonMsg);
@@ -50,10 +42,10 @@ namespace PureMVC.Core
         }
 
         /// <summary>
-        /// <c>View</c> Singleton Factory method. 
+        /// <c>View</c> 获取View单例类
         /// </summary>
-        /// <param name="factory">the <c>FuncDelegate</c> of the <c>IView</c></param>
-        /// <returns>the instance for this Singleton key </returns>
+        /// <param name="factory">实例化IView接口的委托</param>
+        /// <returns>View 实例</returns>
         public static IView GetInstance(Func<IView> factory)
         {
             if (instance == null)
@@ -64,11 +56,10 @@ namespace PureMVC.Core
         }
 
         /// <summary>
-        ///     Register an <c>IObserver</c> to be notified
-        ///     of <c>INotifications</c> with a given name.
+        /// 注册一个 Observer
         /// </summary>
-        /// <param name="notificationName">the name of the <c>INotifications</c> to notify this <c>IObserver</c> of</param>
-        /// <param name="observer">the <c>IObserver</c> to register</param>
+        /// <param name="notificationName">通知消息的名称 of</param>
+        /// <param name="observer">Observer 实例</param>
         public virtual void RegisterObserver(string notificationName, IObserver observer)
         {
             if (observerMap.TryGetValue(notificationName, out var observers))
@@ -82,26 +73,15 @@ namespace PureMVC.Core
         }
 
         /// <summary>
-        /// Notify the <c>IObservers</c> for a particular <c>INotification</c>.
+        /// 通知所有与Notification想关联的Observer
         /// </summary>
-        /// <remarks>
-        ///     <para>
-        ///         All previously attached <c>IObservers</c> for this <c>INotification</c>'s
-        ///         list are notified and are passed a reference to the <c>INotification</c> in
-        ///         the order in which they were registered.
-        ///     </para>
-        /// </remarks>
-        /// <param name="notification"></param>
+        /// <param name="notification">Notification 实例</param>
         public virtual void NotifyObservers(INotification notification)
         {
-            // Get a reference to the observers list for this notification name
             if (observerMap.TryGetValue(notification.Name, out var observersRef))
             {
-                // Copy observers from reference array to working array, 
-                // since the reference array may change during the notification loop
                 var observers = new List<IObserver>(observersRef);
 
-                // Notify Observers from the working array
                 foreach (var observer in observers)
                 {
                     observer.NotifyObserver(notification);
@@ -116,127 +96,105 @@ namespace PureMVC.Core
         /// <param name="notifyContext">对应消息的通知对象（Mediator）</param>
         public virtual void RemoveObserver(string notificationName, object notifyContext)
         {
-            // the observer list for the notification under inspection
+
             if (observerMap.TryGetValue(notificationName, out var observers))
             {
-                // find the observer for the notifyContext
+
                 for (var i = 0; i < observers.Count; i++)
                 {
                     if (observers[i].CompareNotifyContext(notifyContext))
                     {
-                        // there can only be one Observer for a given notifyContext 
-                        // in any given Observer list, so remove it and break
                         observers.RemoveAt(i);
                         break;
                     }
                 }
 
-                // Also, when a Notification's Observer list length falls to
-                // zero, delete the notification key from the observer map
                 if (observers.Count == 0)
                     observerMap.TryRemove(notificationName, out _);
             }
         }
 
         /// <summary>
-        /// Register an <c>IMediator</c> instance with the <c>View</c>.
+        /// 注册 Mediator
         /// </summary>
-        /// <remarks>
-        ///     <para>
-        ///         Registers the <c>IMediator</c> so that it can be retrieved by name,
-        ///         and further interrogates the <c>IMediator</c> for its 
-        ///         <c>INotification</c> interests.
-        ///     </para>
-        ///     <para>
-        ///         If the <c>IMediator</c> returns any <c>INotification</c>
-        ///         names to be notified about, an <c>Observer</c> is created encapsulating 
-        ///         the <c>IMediator</c> instance's <c>handleNotification</c> method 
-        ///         and registering it as an <c>Observer</c> for all <c>INotifications</c> the
-        ///         <c>IMediator</c> is interested in.
-        ///     </para>
-        /// </remarks>
-        /// <param name="mediator">the name to associate with this <c>IMediator</c> instance</param>
+        /// <param name="mediator">IMediator 实例</param>
         public virtual void RegisterMediator(IMediator mediator)
         {
-            // do not allow re-registration (you must to removeMediator fist)
-            // Register the Mediator for retrieval by name
+
             if (mediatorMap.TryAdd(mediator.MediatorName, mediator))
             {
-                // Get Notification interests, if any.
+
                 var interests = mediator.ListNotificationInterests();
 
-                // Register Mediator as an observer for each notification of interests
+
                 if (interests.Length > 0)
                 {
-                    // Create Observer referencing this mediator's handleNotification method
+
                     IObserver observer = new Observer(mediator.HandleNotification, mediator);
 
-                    // Register Mediator as Observer for its list of Notification interests
+
                     foreach (var interest in interests)
                     {
                         RegisterObserver(interest, observer);
                     }
                 }
-                // alert the mediator that it has been registered
+
                 mediator.OnRegister();
             }
         }
 
         /// <summary>
-        /// Retrieve an <c>IMediator</c> from the <c>View</c>.
+        /// 检索对应的Mediator
         /// </summary>
-        /// <param name="mediatorName">the name of the <c>IMediator</c> instance to retrieve.</param>
-        /// <returns>the <c>IMediator</c> instance previously registered with the given <c>mediatorName</c>.</returns>
+        /// <param name="mediatorName">检索Mediator的名称</param>
+        /// <returns>返回检索Mediator的实例</returns>
         public virtual IMediator RetrieveMediator(string mediatorName)
         {
             return mediatorMap.TryGetValue(mediatorName, out var mediator) ? mediator : null;
         }
 
         /// <summary>
-        /// Remove an <c>IMediator</c> from the <c>View</c>.
+        /// 注销对应的Mediator
         /// </summary>
-        /// <param name="mediatorName">name of the <c>IMediator</c> instance to be removed.</param>
-        /// <returns>the <c>IMediator</c> that was removed from the <c>View</c></returns>
+        /// <param name="mediatorName">注销Mediator的名称</param>
+        /// <returns>返回注销Mediator的实例</returns>
         public virtual IMediator RemoveMediator(string mediatorName)
         {
-            // Retrieve the named mediator
+
             if (mediatorMap.TryRemove(mediatorName, out var mediator))
             {
-                // for every notification this mediator is interested in...
+
                 var interests = mediator.ListNotificationInterests();
                 foreach (var interest in interests)
                 {
-                    // remove the observer linking the mediator 
-                    // to the notification interest
                     RemoveObserver(interest, mediator);
                 }
 
-                // remove the mediator from the map
                 mediator.OnRemove();
             }
             return mediator;
         }
 
         /// <summary>
-        /// Check if a Mediator is registered or not
+        /// 检查对应的Mediator是否存在
         /// </summary>
-        /// <param name="mediatorName"></param>
-        /// <returns>whether a Mediator is registered with the given <c>mediatorName</c>.</returns>
+        /// <param name="mediator名称"></param>
+        /// <returns>此名称的Mediator是否存在的bool值</returns>
         public virtual bool HasMediator(string mediatorName)
         {
             return mediatorMap.ContainsKey(mediatorName);
         }
 
-        /// <summary>Mapping of Mediator names to Mediator instances</summary>
+        /// <summary>所有注册Mediator集合</summary>
         protected readonly ConcurrentDictionary<string, IMediator> mediatorMap;
 
-        /// <summary>Mapping of Notification names to Observer lists</summary>
+        /// <summary>所有需要通知的Observer集合</summary>
         protected readonly ConcurrentDictionary<string, IList<IObserver>> observerMap;
 
-        /// <summary>Singleton instance</summary>
+        /// <summary>View 单例实例</summary>
         protected static IView instance;
 
-        /// <summary>Message Constants</summary>
+        /// <summary>报错信息</summary>
         protected const string SingletonMsg = "View Singleton already constructed!";
     }
 }
