@@ -20,3 +20,6 @@ PureMVC_Standard/PureMVC.csproj
 PureMVC_Standard/PureMVC_Standard.sln
 PureMVC_Standard/obj/
 PureMVC_Standard/.vs/PureMVC_Standard/v16/.suo
+Demo/Library/
+Demo/Temp/
+Demo/Logs/
