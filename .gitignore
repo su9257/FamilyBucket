@@ -23,3 +23,9 @@ PureMVC_Standard/.vs/PureMVC_Standard/v16/.suo
 Demo/Library/
 Demo/Temp/
 Demo/Logs/
+Demo/Assembly-CSharp.csproj
+Demo/Assembly-CSharp-firstpass.csproj
+Demo/Demo.sln
+Demo/.vs/Demo/v16/.suo
+Demo/obj/Debug/Assembly-CSharp-firstpass.csprojAssemblyReference.cache
+Demo/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
