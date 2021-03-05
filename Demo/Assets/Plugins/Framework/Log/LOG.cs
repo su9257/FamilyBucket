@@ -16,7 +16,7 @@ public class LogEntry
     public readonly string Message;
     public readonly Exception Exception;
 
-    public LogEntry(LoggingEventType severity, string message, Exception exception = null)
+    public LogEntry(string message, LoggingEventType severity, Exception exception = null)
     {
         if (message == null) throw new ArgumentNullException("message");
         if (message == string.Empty) throw new ArgumentException("empty", "message");
@@ -31,12 +31,26 @@ public static class LoggerExtensions
 {
     public static void Log(this ILogger logger, string message)
     {
-        logger.Log(new LogEntry(LoggingEventType.Information, message));
+        logger.Log(new LogEntry(message, LoggingEventType.Information));
+    }
+    public static void Log(this ILogger logger, string message, LoggingEventType loggingEventType)
+    {
+        logger.Log(new LogEntry(message, loggingEventType));
+    }
+
+    public static void Log(this ILogger logger, string message, LoggingEventType loggingEventType, Exception exception)
+    {
+        logger.Log(new LogEntry(message, loggingEventType, exception));
     }
 
     public static void Log(this ILogger logger, Exception exception)
     {
-        logger.Log(new LogEntry(LoggingEventType.Error, exception.Message, exception));
+        logger.Log(new LogEntry(exception.Message, LoggingEventType.Error, exception));
+    }
+
+    public static void Log(this ILogger logger, Exception exception, LoggingEventType loggingEventType)
+    {
+        logger.Log(new LogEntry(exception.Message, LoggingEventType.Information, exception));
     }
 
     // More methods here.
