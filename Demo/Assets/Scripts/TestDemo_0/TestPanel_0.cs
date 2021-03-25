@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class TestPanel_0 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        ApplicationFacade.Instance.RegisterMediator(new TestPanel_0_Mediator_0(nameof(TestPanel_0_Mediator_0), this));
+    }
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

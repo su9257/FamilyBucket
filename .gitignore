@@ -33,3 +33,12 @@ Demo/obj/
 DesignPatternFamilyBucket/obj/
 DesignPatternFamilyBucket/.vsconfig
 DesignPatternFamilyBucket/.vs/DesignPatternFamilyBucket/v16/.suo
+Demo/.vsconfig
+Demo/Assembly-CSharp-Editor.csproj
+Demo/Demo.sln.DotSettings.user
+Demo/Sirenix.OdinInspector.CompatibilityLayer.csproj
+Demo/Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj
+Demo/.idea/
+Demo/Assets/Arts/
+Demo/Assets/Plugins/Sirenix/
+Demo/Assets/TextMesh Pro/
