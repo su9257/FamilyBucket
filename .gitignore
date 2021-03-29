@@ -43,3 +43,6 @@ Demo/Assets/Arts/
 Demo/Assets/Plugins/Sirenix/
 Demo/Assets/TextMesh Pro/
 Demo/Assembly-CSharp-Editor-firstpass.csproj
+UnityEditorFamilyBucket/Temp/
+UnityEditorFamilyBucket/Library/
+UnityEditorFamilyBucket/Logs/Packages-Update.log
