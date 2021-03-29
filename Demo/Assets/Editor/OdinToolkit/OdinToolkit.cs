@@ -31,7 +31,7 @@ public class OdinToolkit : OdinMenuEditorWindow
         //tree.Add("一键更改SortLayer", CreateInstance(typeof(OneKeyChangeSortingLayers)), EditorIcons.SettingsCog);
         tree.Add("一键生成代码模板", CreateInstance(typeof(OneKeyCreateScriptTemplate)), EditorIcons.File);
         tree.Add("一键生成Excel代码模板", CreateInstance(typeof(OneKetCreatExcelCSharp)), EditorIcons.File);
-
+        tree.Add("一键更改宏定义", CreateInstance(typeof(OneKeyChangeDefineSymbols)), EditorIcons.Flag);
         #endregion
 
         return tree;

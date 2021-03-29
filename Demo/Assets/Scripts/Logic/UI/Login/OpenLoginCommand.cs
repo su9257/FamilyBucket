@@ -8,6 +8,6 @@ public class OpenLoginCommand : SimpleCommand
 {
     public override void Execute(INotification notification)
     {
-        UIManager.Instance.LoadAsyncAndInject("LoginPanel", () => new LoginMonoBehaviour());
+        UIManager.Instance.LoadAsyncAndInject("LoginPanel", () => new LoginBehaviourRoot());
     }
 }

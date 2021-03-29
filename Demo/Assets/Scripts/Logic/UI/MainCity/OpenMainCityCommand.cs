@@ -8,6 +8,6 @@ public class OpenMainCityCommand : SimpleCommand
 {
     public override void Execute(INotification notification)
     {
-        UIManager.Instance.LoadAsyncAndInject("MainCityPanel", () => new MainCityMonoBehaviour());
+        UIManager.Instance.LoadAsyncAndInject("MainCityPanel", () => new MainCityBehaviourRoot());
     }
 }

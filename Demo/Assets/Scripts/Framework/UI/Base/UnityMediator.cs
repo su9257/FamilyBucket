@@ -14,6 +14,14 @@ public class UnityMediator : Mediator, IStart, IOnEnable, IUpdate, IOnDisable, I
         NAME = mediatorName;
     }
 
+    public GameObject GetPanelGameObject
+    {
+        get
+        {
+            return ViewComponent as GameObject;
+        }
+    }
+
     public sealed override void OnRegister()
     {
 

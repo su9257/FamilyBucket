@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 注册所有的Mediator
 /// </summary>
-public class LoginMonoBehaviour : IMonoBehaviour
+public class LoginBehaviourRoot : IMonoBehaviour
 {
     public List<Func<UnityMediator>> ListUnityMediatorInterests()
     {
