@@ -46,3 +46,8 @@ Demo/Assembly-CSharp-Editor-firstpass.csproj
 UnityEditorFamilyBucket/Temp/
 UnityEditorFamilyBucket/Library/
 UnityEditorFamilyBucket/Logs/Packages-Update.log
+UnityEditorFamilyBucket/.vsconfig
+UnityEditorFamilyBucket/Assembly-CSharp-Editor.csproj
+UnityEditorFamilyBucket/UnityEditorFamilyBucket.sln
+UnityEditorFamilyBucket/.vs/UnityEditorFamilyBucket/v16/.suo
+UnityEditorFamilyBucket/obj/
