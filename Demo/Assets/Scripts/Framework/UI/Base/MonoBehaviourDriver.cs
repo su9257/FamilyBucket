@@ -31,7 +31,7 @@ public class MonoBehaviourDriver : MonoBehaviour
             //数据、事件等相关属性注册
             mediator.ViewComponent = gameObject;
 
-            BathRegisterAction(mediator);
+            BatchRegisterAction(mediator);
 
             unityMediators.Add(mediator);
         }
@@ -68,7 +68,7 @@ public class MonoBehaviourDriver : MonoBehaviour
         }
     }
 
-    private void BathRegisterAction(IMediator mediator)
+    private void BatchRegisterAction(IMediator mediator)
     {
         if (mediator is IOnEnable onEnable)
         {
